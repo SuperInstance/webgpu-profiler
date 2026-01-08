@@ -1,0 +1,90 @@
+{
+  "name": "browser-gpu-profiler",
+  "version": "1.0.0",
+  "description": "Browser-based GPU profiler for WebGPU applications. Monitor GPU utilization, track memory allocation, profile shader performance, and benchmark GPU capabilities in real-time.",
+  "keywords": [
+    "GPU profiler",
+    "WebGPU profiler",
+    "browser GPU monitoring",
+    "GPU performance analysis",
+    "WebGPU diagnostics",
+    "GPU benchmarking",
+    "graphics performance",
+    "compute profiling",
+    "GPU utilization",
+    "shader profiling",
+    "WebGPU compute",
+    "GPU memory tracking",
+    "performance monitoring",
+    "GPU metrics",
+    "browser performance",
+    "graphics card profiler",
+    "GPU diagnostics",
+    "WebGPU performance",
+    "GPU benchmark",
+    "shader performance",
+    "compute shader profiling"
+  ],
+  "author": "SuperInstance",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./profiler": {
+      "types": "./dist/profiler.d.ts",
+      "import": "./dist/profiler.js"
+    },
+    "./benchmarks": {
+      "types": "./dist/benchmarks.d.ts",
+      "import": "./dist/benchmarks.js"
+    },
+    "./metrics": {
+      "types": "./dist/metrics.d.ts",
+      "import": "./dist/metrics.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@vitest/ui": "^1.0.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SuperInstance/browser-gpu-profiler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SuperInstance/browser-gpu-profiler/issues"
+  },
+  "homepage": "https://github.com/SuperInstance/browser-gpu-profiler#readme"
+}
