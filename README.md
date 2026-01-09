@@ -1,10 +1,51 @@
 # Browser GPU Profiler 🎮
 
+<!-- Standard Badges -->
 [![npm version](https://badge.fury.io/js/browser-gpu-profiler.svg)](https://www.npmjs.com/package/browser-gpu-profiler)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Node](https://img.shields.io/badge/Node-%3E=18.0.0-green.svg)](https://nodejs.org/)
+[![GitHub stars](https://img.shields.io/github/stars/SuperInstance/browser-gpu-profiler?style=social)](https://github.com/SuperInstance/browser-gpu-profiler/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/SuperInstance/browser-gpu-profiler.svg)](https://github.com/SuperInstance/browser-gpu-profiler/issues)
+[![GitHub forks](https://img.shields.io/github/forks/SuperInstance/browser-gpu-profiler.svg)](https://github.com/SuperInstance/browser-gpu-profiler/network)
+
+<!-- GPU/WebGPU Specific Badges -->
+[![WebGPU](https://img.shields.io/badge/WebGPU-Supported-orange.svg)](https://www.w3.org/TR/webgpu/)
+[![GPU Acceleration](https://img.shields.io/badge/GPU-Accelerated-success.svg)](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)
+[![Performance](https://img.shields.io/badge/Performance-Production--ready-brightgreen.svg)](https://github.com/SuperInstance/browser-gpu-profiler)
+[![Browser](https://img.shields.io/badge/Browser-Chrome%20%2F%20Edge%20113%2B-blue.svg)](https://www.google.com/chrome/)
+
+---
 
 > **Unleash the full potential of WebGPU with comprehensive GPU profiling.** Monitor GPU utilization, track memory allocation, profile shader performance, and benchmark capabilities in real-time. Build faster, smoother, and more efficient GPU-accelerated applications.
+
+## 📊 Key Stats
+
+- **Zero Dependencies** - Works completely standalone
+- **Real-Time Monitoring** - Track FPS, GPU utilization, memory usage
+- **Cross-Device Benchmarks** - Compare performance across hardware
+- **Production-Ready** - Battle-tested in GPU-intensive applications
+- **Privacy-First** - All data stays local, no external calls
+
+---
+
+## 📑 Table of Contents
+
+- [⚡ Why Browser GPU Profiler?](#-why-browser-gpu-profiler)
+- [🚀 Features](#-features)
+- [📦 Installation](#-installation)
+- [⚡ Quick Start](#-quick-start)
+- [📊 How It Works](#-how-it-works)
+- [📖 Documentation](#-documentation)
+- [🎯 Real-World Use Cases](#-real-world-use-cases)
+- [📚 Inspiring Examples](#-inspiring-examples)
+- [📚 API Reference](#-api-reference)
+- [🧪 Testing](#-testing)
+- [🔧 Development](#-development)
+- [🌐 Browser Support](#-browser-support)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [🔗 Links](#-links)
 
 ---
 
