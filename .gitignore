@@ -43,3 +43,4 @@ temp/
 
 # Documentation
 docs/generated/
+__pycache__/
