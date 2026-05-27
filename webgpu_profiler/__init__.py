@@ -5,8 +5,17 @@ from .metrics import Metrics, MemoryMetrics, MemoryAllocation, MemorySample, Sha
 from .frame import FrameAnalysis, FrameMetrics
 from .report import ProfileReport, Bottleneck
 from .benchmark import BenchmarkRunner, BenchmarkResult, BenchmarkSuite, BenchmarkType
+from .flamegraph import FlameNode, FlamegraphConfig, FlamegraphRenderer
+from .alert import (
+    Alert,
+    AlertLevel,
+    AlertStatus,
+    PerformanceAlert,
+    RegressionResult,
+    ThresholdRule,
+)
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __all__ = [
     "Profiler",
     "ProfilerConfig",
@@ -25,4 +34,13 @@ __all__ = [
     "BenchmarkResult",
     "BenchmarkSuite",
     "BenchmarkType",
+    "FlameNode",
+    "FlamegraphConfig",
+    "FlamegraphRenderer",
+    "Alert",
+    "AlertLevel",
+    "AlertStatus",
+    "PerformanceAlert",
+    "RegressionResult",
+    "ThresholdRule",
 ]
