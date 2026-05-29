@@ -18,9 +18,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        # cache removed - no lock file
     - name: Install dependencies
-      run: npm ci || npm install
+      run: npm install
     - name: Lint
       run: npx eslint . --ext .js,.ts --max-warnings=100 || true
     - name: Build
