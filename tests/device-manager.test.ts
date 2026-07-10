@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { GPUDeviceManager } from '../src/device-manager';
-import { GPUError } from '../src/types';
 
 describe('GPUDeviceManager', () => {
   let deviceManager: GPUDeviceManager;
@@ -120,7 +119,7 @@ describe('GPUDeviceManager', () => {
         new Error('Adapter request failed')
       );
 
-      await expect(deviceManager.initialize()).rejects.toContain(GPUError.RequestAdapterFailed);
+      await expect(deviceManager.initialize()).rejects.toThrow('RequestAdapterFailed');
     });
 
     it('should handle RequestDeviceFailed error', async () => {
@@ -130,7 +129,7 @@ describe('GPUDeviceManager', () => {
         new Error('Device request failed')
       );
 
-      await expect(deviceManager.initialize()).rejects.toContain(GPUError.RequestDeviceFailed);
+      await expect(deviceManager.initialize()).rejects.toThrow('RequestDeviceFailed');
     });
   });
 

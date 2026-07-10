@@ -339,6 +339,9 @@ export class GPUMetricsCollector {
         bottlenecks: [],
       };
       this.shaderMetrics.set(shaderId, metrics);
+      // Evaluate bottlenecks even on first invocation so a single very slow
+      // shader is flagged immediately (previously only re-sampled on update).
+      this.detectBottlenecks(metrics);
     } else {
       const totalExecutionTime =
         metrics.avgExecutionTime * metrics.invocations + executionTime;
@@ -391,9 +394,27 @@ export class GPUMetricsCollector {
 
   /**
    * Calculate texture size in bytes
+   *
+   * A live WebGPU GPUTexture exposes `.width`, `.height`, and
+   * `.depthOrArrayLayers` as numbers. Resource descriptors and some mocks
+   * instead carry a `size` GPUExtent3D — either `[w, h, d]` or
+   * `{ width, height, depthOrArrayLayers }`. Handle both so we never produce
+   * a NaN footprint (which would silently corrupt memory totals).
    */
   private calculateTextureSize(texture: any): number {
-    const { width, height, depthOrArrayLayers } = texture;
+    const sizeExtent = texture.size;
+    const width =
+      texture.width ??
+      (Array.isArray(sizeExtent) ? sizeExtent[0] : sizeExtent?.width) ??
+      1;
+    const height =
+      texture.height ??
+      (Array.isArray(sizeExtent) ? sizeExtent[1] : sizeExtent?.height) ??
+      1;
+    const depthOrArrayLayers =
+      texture.depthOrArrayLayers ??
+      (Array.isArray(sizeExtent) ? sizeExtent[2] : sizeExtent?.depthOrArrayLayers) ??
+      1;
     const format = texture.format;
     const bytesPerBlock = this.getBytesPerBlock(format);
     const blocks = width * height * depthOrArrayLayers;
