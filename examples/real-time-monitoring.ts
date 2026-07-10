@@ -113,7 +113,7 @@ async function realTimeMonitoringExample() {
       // Detect memory leaks
       if (memoryHistory.length > 10) {
         const recent = memoryHistory.slice(-10);
-        const trend = recent[recent.length - 1].totalAllocated - recent[0].totalAllocized;
+        const trend = recent[recent.length - 1].totalAllocated - recent[0].totalAllocated;
 
         if (trend > 10 * 1024 * 1024) {
           // Increased by more than 10MB
