@@ -1,29 +1,34 @@
 name: Node.js CI
 
+# Real gate for the TypeScript package: install, type-check, build, test.
+# Every step FAILS the build on error (no `|| true`). The previous version
+# swallowed lint/test failures with `|| true`, making CI fake-green.
+
 on:
   push:
-    branches: [ '*' ]
+    branches: ['*']
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        node-version: ['18', '20', '22']
+        node-version: ['20', '22']
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        # cache removed - no lock file
-    - name: Install dependencies
-      run: npm install
-    - name: Lint
-      run: npx eslint . --ext .js,.ts --max-warnings=100 || true
-    - name: Build
-      run: npm run build --if-present
-    - name: Test
-      run: npm test || true
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          # No cache: package-lock.json is gitignored.
+      - name: Install dependencies
+        run: npm install
+      - name: Type check
+        run: npm run type-check
+      - name: Build
+        run: npm run build --if-present
+      - name: Test
+        run: npm test

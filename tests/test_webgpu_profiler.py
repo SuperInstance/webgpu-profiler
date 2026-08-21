@@ -215,6 +215,21 @@ class TestProfiler:
         with pytest.raises(RuntimeError):
             p.sample()
 
+    def test_sample_frame_time_override(self):
+        # Feeding explicit frame_time lets the analytics API ingest recorded /
+        # replay data instead of deriving nonsense frame times from a wall-clock
+        # delta (which is microseconds when sample() is called in a tight loop).
+        p = Profiler()
+        p.start()
+        for _ in range(60):
+            p.sample(frame_time=16.7, compute_time=12.0, utilization=72.0)
+        p.stop()
+        stats = p.performance_stats()
+        assert round(stats.avg_frame_time, 1) == 16.7
+        assert 59 <= stats.avg_fps <= 61
+        # Physically consistent: compute time cannot exceed the frame time.
+        assert stats.avg_compute_time <= stats.avg_frame_time
+
     def test_memory_tracking(self):
         p = Profiler()
         p.track_buffer("buf1", 1024)

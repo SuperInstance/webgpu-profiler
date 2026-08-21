@@ -32,7 +32,10 @@ const mockAdapter = {
   }),
   requestDevice: vi.fn().mockResolvedValue({
     destroy: vi.fn(),
-    lost: Promise.resolve({ message: 'Device destroyed' }),
+    // A real GPUDevice's `lost` promise stays pending until the device is
+    // actually lost. An already-resolved promise made the device-lost handler
+    // fire DURING initialize(), nulling the device so isInitialized() was false.
+    lost: new Promise<{ message: string }>(() => {}),
     createBuffer: vi.fn(),
     createTexture: vi.fn(),
     createShaderModule: vi.fn(),
@@ -76,10 +79,13 @@ Object.defineProperty(global.navigator, 'gpu', {
   configurable: true,
 });
 
-// Mock performance API
+// Mock performance API. Date.now() returns the same value for calls within
+// the same millisecond, which yielded frameTime = 0 / fps = Infinity. Return a
+// monotonically increasing clock (~16ms ticks ≈ 60fps) instead.
+let perfNow = 1000;
 global.performance = {
   ...global.performance,
-  now: vi.fn(() => Date.now()),
+  now: vi.fn(() => (perfNow += 16)),
 };
 
 // Mock window.setInterval and clearInterval

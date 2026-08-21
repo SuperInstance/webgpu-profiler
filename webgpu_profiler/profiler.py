@@ -98,15 +98,27 @@ class Profiler:
     def sample(self, **overrides: float) -> Metrics:
         """Capture a metrics snapshot (usually called each frame).
 
-        Accepts optional keyword overrides for compute_time, utilization, etc.
+        Accepts optional keyword overrides. ``compute_time``, ``utilization``,
+        ``power_usage``, ``temperature`` and ``clock_speed`` are forwarded as-is.
+        ``frame_time`` (ms) and ``fps`` override the wall-clock derived values;
+        providing ``frame_time`` lets you feed pre-recorded or replay data
+        through the analytics pipeline instead of relying on real elapsed time.
         """
         if self._state != ProfilerState.RUNNING:
             raise RuntimeError("Profiler is not running")
 
         now = _time.perf_counter()
         dt = now - self._last_sample_time
-        frame_time = dt * 1000  # ms
-        fps = 1000.0 / frame_time if frame_time > 0 else 0.0
+        # When frame_time is supplied, use it directly (replay/analytics path);
+        # otherwise fall back to the wall-clock delta (live-capture path).
+        if "frame_time" in overrides:
+            frame_time = float(overrides["frame_time"])
+        else:
+            frame_time = dt * 1000  # ms
+        if "fps" in overrides:
+            fps = float(overrides["fps"])
+        else:
+            fps = 1000.0 / frame_time if frame_time > 0 else 0.0
 
         compute_time = overrides.get("compute_time", frame_time * 0.5)
         utilization = overrides.get("utilization", min(100.0, (compute_time / frame_time) * 100) if frame_time > 0 else 0.0)
