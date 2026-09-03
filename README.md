@@ -5,6 +5,12 @@ track GPU memory allocations (buffers + textures), record shader execution
 times, and run a GPU capability benchmark suite. The TypeScript package is
 published to npm as **[`browser-gpu-profiler`](https://www.npmjs.com/package/browser-gpu-profiler)**.
 
+<p align="center">
+  <img src="assets/images/hero.jpg" width="680" alt="A brass stopwatch glowing amber on a dark instrument desk — timing light itself, one frame at a time">
+</p>
+
+*iProfiler's law: you cannot tune a frame you cannot time. The stopwatch over the instruments.*
+
 > ### ⚠️ Read this before you `npm install`
 > This GitHub repo is **`SuperInstance/webgpu-profiler`**, but the package it
 > publishes to npm is named **`browser-gpu-profiler`** (same author). Do **not**
