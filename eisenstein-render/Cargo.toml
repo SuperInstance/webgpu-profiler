@@ -1,0 +1,17 @@
+[package]
+name = "eisenstein-render"
+version = "0.1.0"
+edition = "2021"
+description = "Eisenstein hexagonal spatial rendering for GPU workloads"
+
+[dependencies]
+eisenstein = { version = "0.1" }
+snapkit = { version = "0.1" }
+
+[lib]
+name = "eisenstein_render"
+path = "src/lib.rs"
+
+[[test]]
+name = "integration"
+path = "tests/integration.rs"
